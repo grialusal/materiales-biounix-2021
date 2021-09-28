@@ -14,7 +14,7 @@ Antiguamente, los servidores eran accedidos mediante un dispositivo denominado t
     
 Actualmente, el esquema es diferente. En lugar de un terminal se dispone de PCs de propósito general y un programa que emula el comportamiento de los antiguos terminales. La conexión en lugar de hacerse a través de una línea dedicada, se realiza por Internet y siguiendo un protocolo, que normalmente para conexiones de texto será SSH, la versión con transmisión codificada del viejo TELNET.  
       
-Programas para PC emuladores de los distintos modelos de terminales existen muchos. Debéis usar aquel que más os guste y que mejor sepáis configurar. Si usas Windows, el más famoso es [PuTTY (SSH)](https://www.putty.org/), aunque desde hace ya un tiempo, Windows da la opción de instalar un cliente SSH. 
+Programas para PC emuladores de los distintos modelos de terminales existen muchos. Debéis usar aquel que más os guste y que mejor sepáis configurar. Si usas Windows, el más famoso es [PuTTY (SSH)](https://www.putty.org/), aunque desde hace ya un tiempo, Windows da la opción de instalar un [cliente SSH](https://www.softzone.es/windows-10/como-se-hace/activar-usar-ssh-windows-10/). 
     
       
 Si usáis Linux o MacOS, no necesitáis ningún programa externo. Os basta con abrir un terminal y poner:
