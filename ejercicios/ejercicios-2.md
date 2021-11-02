@@ -139,13 +139,13 @@ Como se observa, la copia de los enlaces duro y blando produce ficheros nuevos q
 
 
 ## Ejercicio 2
-Usa la documentación de `find` para encontrar todos los notebook Jupyter con fecha de última modificación 30 de Noviembre de 2020 que haya en tu directorio HOME. Excluye todos aquellos que se encuentren dentro de directorios ocultos (aquellos que comienzan por un punto `.`). 
+Usa la documentación de find para encontrar las opciones que permiten encontrar todos los notebook Jupyter (ficheros con extension ipynb) con fecha de última modificación 17 de Noviembre de 2020 que haya en el directorio /home/alejandro. Excluye todos aquellos que se encuentren dentro de directorios ocultos (aquellos que comienzan por un punto .).
 
 
 ### Respuesta ejercicio 2
-Para hacer lo que se pide, vamos a partir de la expresión `find $HOME -name "*ipynb" -type f`, que buscará en `$HOME` (en mi caso `/home/abenito`) todos los ficheros (`-type f`, debemos especificar esto porque podría haber directorios terminados en "ipynb" que no nos interesarían) que terminen en "ipynb" (`-name *ipynb`). 
+Para hacer lo que se pide, vamos a partir de la expresión `find /home/alejandro -name "*ipynb" -type f`, que buscará en `$HOME` (en mi caso `/home/abenito`) todos los ficheros (`-type f`, debemos especificar esto porque podría haber directorios terminados en "ipynb" que no nos interesarían) que terminen en "ipynb" (`-name *ipynb`). 
 
-En un segundo paso, vamos ahora a restringir la búsqueda a aquellos ficheros que se modificaron el día 30 de Noviembre de 2020. Si consultamos la ayuda, vemos que existe la opción `-newerXY`: 
+En un segundo paso, vamos ahora a restringir la búsqueda a aquellos ficheros que se modificaron el día 17 de Noviembre de 2020. Si consultamos la ayuda, vemos que existe la opción `-newerXY`: 
 
 ```
        -newerXY reference
@@ -158,7 +158,7 @@ En un segundo paso, vamos ahora a restringir la búsqueda a aquellos ficheros qu
               t   reference is interpreted directly as a time
 ```
 
-Como buscamos los ficheros modificados y además tenemos una fecha en concreto, usaremos `-newermt '11/30/2020'`. Sin embargo, esto no será suficiente para dar con lo que estamos buscando, ya que `-newmrt` nos da aquellos modificados **a partir** de la fecha proporcionada. Para que devuelva sólo los ficheros con fecha de última modificación = 30/11/2020. Si navegamos el manual, veremos que no existe ninguna opción para realizar especificamente esto. Sin embargo, en la sección "OPERATORS" se nos dice que podemos encadenar operadores:
+Como buscamos los ficheros modificados y además tenemos una fecha en concreto, usaremos `-newermt '11/17/2020'`. Sin embargo, esto no será suficiente para dar con lo que estamos buscando, ya que `-newmrt` nos da aquellos modificados **a partir** de la fecha proporcionada. Para que devuelva sólo los ficheros con fecha de última modificación = 30/17/2020. Si navegamos el manual, veremos que no existe ninguna opción para realizar especificamente esto. Sin embargo, en la sección "OPERATORS" se nos dice que podemos encadenar operadores:
 
 ```
  OPERATORS
@@ -174,9 +174,9 @@ Como buscamos los ficheros modificados y además tenemos una fecha en concreto, 
               Same as ! expr, but not POSIX compliant.
 ```
 
-En concreto, la opción `!/-not` es interesante ya que es el operador de negación. Por tanto, podemos usarla para sacar los ficheros modificamos exactamente el día 30/11/2020. ¿Cuáles son esos? Aquellos cuya fecha de última modificación es posterior al 30/11/2020 **pero no** es posterior al 1/12/2020, o sea:
+En concreto, la opción `!/-not` es interesante ya que es el operador de negación. Por tanto, podemos usarla para sacar los ficheros modificamos exactamente el día 30/11/2020. ¿Cuáles son esos? Aquellos cuya fecha de última modificación es posterior al 17/11/2020 **pero no** es posterior al 18/11/2020, o sea:
 
-`find $HOME -type f -name "*ipynb" -newermt '11/30/2020' -not -newermt '12/1/2020'`
+`find /home/alejandro -type f -name "*ipynb" -newermt '11/17/2020' -not -newermt '11/18/2020'`
 
 Si además queremos excluir aquellos que se encuentren en alguna ruta oculta, utilizaremos `-path`. Esta opción funciona igual que `-name` pero opera sobre toda la ruta del fichero: 
 
@@ -198,7 +198,7 @@ Si además queremos excluir aquellos que se encuentren en alguna ruta oculta, ut
 Como los ficheros que queremos descartar contendrán `/.` en algún punto de su ruta absoluta, basta con excluirlos también usando `-not`. La expresión regular que captura esto es: `*/\.*`: (tenemos que escapar el punto ya que si no nos cogerá cualquier caracter). Al final nos queda:
 
 ```
-find $HOME -name "*ipynb" -newermt '11/30/2020' -not -newermt '12/1/2020' -not -path '*/\.*'
+find /home/alejandro -name "*ipynb" -newermt '11/17/2020' -not -newermt '11/18/2020' -not -path '*/\.*'
 ```
 
 
