@@ -240,43 +240,45 @@ Para responder a este ejercicio, trazamos el siguiente plan:
 El plan parece claro, pero si operamos como antes y tratamos de extraer la tercera columna usando el espacio en blanco como separador surgen problemas...
 
 ```
-abenito@cpg3:~/sesion-iii/fasta$ ls -l /home/ | cut -d " " -f3
+abenito@cpg3:~$ ls -l /home/ | cut -d " " -f3
 
 abenito
+adominguez
 adrianambroa
 agarmar
 alba
-9
-1
-amptoboso
+8
+analaura
 anaromero
 arqcarmel
-carlosp
-elenanavarro
-3
-giselcp
-5
+9
 2
-gualtierolugato
-3
+6
 2
-jorgeruizramirez
-josanc
+2
+2
+jenr
+3
 1
 1
 laudupri
 2
 2
-lihuengd
 2
-2
-msandreu
-rafalopez
-rodri
-sagoji
 7
+2
+9
+mcuadrado
+negido
+nelmarin
+nguerrero
+pedrojf
+rodri
+7
+2
+smuntion
+6
 theron
-verogmartos
 ```
 
 Como en la segunda columna (número de hard links) varía en longitud, el separar de esta manera no funciona!
@@ -284,51 +286,53 @@ Como en la segunda columna (número de hard links) varía en longitud, el separa
 Como podríamos solucionarlo? Como siempre, consultamos el manual y vemos que `cut` admite la opción de seleccionar porciones de caracteres con la opción `-c`. Haciendo un poco de trampa, podemos "medir" hasta dónde llega el nombre más largo y cortar por ahí. 
 
 ```
-abenito@cpg3:~/sesion-iii/fasta$ ls -al /home | tail -n+2 | cut -c15-33
+abenito@cpg3:~$ ls -al /home | tail -n+2 | cut -c15-33
 root
 root
 abenito
+adominguez
 adrianambroa
 agarmar
 alba
 alejandro
-root
-amptoboso
+analaura
 anaromero
 arqcarmel
-carlosp
-elenanavarro
+ccalvo
+cpg
 eval_user
 giselcp
-grader-python-bio
 root
 gualtierolugato
+jenr
 jibri
-jmarcosberna
-jorgeruizramirez
-josanc
 root
 root
 laudupri
 lauraalvarezalvarez
 lcorsan
 lihuengd
+loreto
 root
-luisasousa
-msandreu
-rafalopez
+madussana
+mcuadrado
+negido
+nelmarin
+nguerrero
+pedrojf
 rodri
-sagoji
 seqview_user
+sergiobenito
+smuntion
+               1009
 theron
-verogmartos
 ```
 
 Ahora que ya tenemos lo que queríamos, podemos seguir el procedimiento ya conocido:
 
 ```
-abenito@cpg3:~/sesion-iii/fasta$ ls -al /home | tail -n+2 | cut -c15-33 | sort | uniq | wc -l
-31
+abenito@cpg3:~$ ls -al /home | tail -n+2 | cut -c15-33 | sort | uniq | wc -l
+34
 ```
 
 Como ves, este enfoque no es muy escalable. Si tan solo `cut` fuera un poquito más inteligente como para hacerle distinguir qué es un nombre y qué no...
